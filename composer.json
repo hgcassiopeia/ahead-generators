@@ -18,5 +18,12 @@
             "App\\": "app/",
             "Ahost\\Generators\\": "src/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers" : [
+                "Ahost\\Generators\\CommandServiceProvider"
+            ]
+        }
     }
 }

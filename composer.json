@@ -1,0 +1,22 @@
+{
+    "name": "ahs/crud-generators",
+    "description": "A collection of CRUD generators for Lumen",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Thitikan Phagamas",
+            "email": "ph.thitikarn_st@tni.ac.th"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.2.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Ahost\\Generators\\": "src/"
+        }
+    }
+}

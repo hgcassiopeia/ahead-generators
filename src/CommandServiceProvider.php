@@ -1,24 +1,11 @@
 <?php 
 
-namespace Ahost\Generators;
+namespace Ahead\Generators;
 
 use Illuminate\Support\ServiceProvider;
 
-class CommandServiceProvider extends ServiceProvider {
-
-   /**
-    * Bootstrap the application services.
-    *
-    * @return void
-    */
-   public function boot()
-   {
-   }
-
-   protected $commands = [
-      \Ahost\Generators\Console\InstallBlogPackage::class
-  ];
-
+class CommandServiceProvider extends ServiceProvider 
+{
    /**
     * Register the application services.
     *
@@ -26,7 +13,13 @@ class CommandServiceProvider extends ServiceProvider {
     */
    public function register()
    {
-      $this->commands($this->commands);
-  }
+      $this->registerModelCommand();
+   }
 
+   protected function registerModelCommand(){
+      $this->app->singleton('command.ahead.model', function($app){
+          return $app['Ahead\Generators\Console\ModelCommand'];
+      });
+      $this->commands('command.ahead.model');
+  }
 }

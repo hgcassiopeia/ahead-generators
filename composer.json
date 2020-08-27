@@ -16,13 +16,13 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
-            "Ahost\\Generators\\": "src/"
+            "Ahead\\Generators\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers" : [
-                "Ahost\\Generators\\CommandServiceProvider"
+                "Ahead\\Generators\\CommandServiceProvider"
             ]
         }
     }

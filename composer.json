@@ -1,5 +1,5 @@
 {
-    "name": "ahead/generators",
+    "name": "ahead/crud-generators",
     "description": "A collection of CRUD generators for Lumen",
     "type": "library",
     "license": "MIT",

@@ -36,7 +36,7 @@ class RepositoryCommand extends BaseCommand {
     {
         $model = $this->option('model');
         if(!$model){
-            $model = ucwords(str_plural(camel_case($this->argument('name'))));
+            $model = ucwords(strtolower($this->argument('name')));
         }
         return $model;
     }

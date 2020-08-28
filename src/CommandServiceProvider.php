@@ -18,6 +18,14 @@ class CommandServiceProvider extends ServiceProvider
       $this->registerRepositoryCommand();
       $this->registerControllerCommand();
       $this->registerRouteCommand();
+      $this->registerStaterCommand();
+   }
+
+   protected function registerStaterCommand(){
+      $this->app->singleton('command.ahead.start', function($app){
+          return $app['Ahead\Generators\Console\StarterCommand'];
+      });
+      $this->commands('command.ahead.start');
    }
 
    protected function registerModelCommand(){

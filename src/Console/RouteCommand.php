@@ -16,7 +16,7 @@ class RouteCommand extends BaseCommand {
 
     public function handle()
     {
-        $resource = $this->argument('resource');
+        $resource = $this->getResource();
         $laravelRoutes = $this->option('laravel') === "true" ? true: false;
         $templateFile = 'routes';
         $routesPath = 'routes/web.php';
@@ -62,11 +62,16 @@ Route::middleware('auth:api')->get('/user', function (Request \$request) {
         $this->save($content, $routesPath, "{$resource} routes", true);
     }
 
+    protected function getResource()
+    {
+        return strtolower($this->argument('resource'));
+    }
+
     protected function getController()
     {
         $controller = $this->option('controller');
         if(!$controller){
-            $controller = ucwords(str_plural(camel_case($this->argument('resource')))) . 'Controller';
+            $controller = ucwords(strtolower($this->argument('resource'))) . 'Controller';
         }
         else{
             $controller = $controller . 'Controller';

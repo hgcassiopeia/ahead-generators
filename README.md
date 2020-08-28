@@ -3,7 +3,7 @@ A collection of CRUD generators for Lumen by A-Host
 
 # How-To-Use
 
-## วิธี Generate Model, Resource, Repository, Controller, Route ในคำสั่งเดียว
+### วิธี Generate Model, Resource, Repository, Controller, Route ในคำสั่งเดียว
 
 #### Command
 
@@ -11,9 +11,8 @@ A collection of CRUD generators for Lumen by A-Host
 php artisan ahead:start <your resource name in PascalCase or camelCase>
 ```
 
-~~~
 
-## วิธี Generate Model
+### วิธี Generate Model
 
 #### คำอธิบายการใช้ Flag
 
@@ -31,9 +30,8 @@ php artisan ahead:start <your resource name in PascalCase or camelCase>
 php artisan ahead:model <your model name> --<flagname>=<value>
 ```
 
-~~~
 
-## วิธี Generate Resource
+### วิธี Generate Resource
 
 #### คำอธิบายการใช้ Flag
 
@@ -49,9 +47,8 @@ php artisan ahead:model <your model name> --<flagname>=<value>
 php artisan ahead:rsc <your resource name> --<flagname>=<value>
 ```
 
-~~~
 
-## วิธี Generate Repository
+### วิธี Generate Repository
 
 #### คำอธิบายการใช้ Flag
 
@@ -67,10 +64,8 @@ php artisan ahead:rsc <your resource name> --<flagname>=<value>
 php artisan ahead:repo <your repository name> --<flagname>=<value>
 ```
 
-~~~
 
-
-## วิธี Generate Controller
+### วิธี Generate Controller
 
 #### คำอธิบายการใช้ Flag
 
@@ -88,9 +83,8 @@ php artisan ahead:repo <your repository name> --<flagname>=<value>
 php artisan ahead:ctrl <your controller name> --<flagname>=<value>
 ```
 
-~~~
 
-## วิธี Generate Route
+### วิธี Generate Route
 
 #### คำอธิบายการใช้ Flag
 
@@ -104,5 +98,3 @@ php artisan ahead:ctrl <your controller name> --<flagname>=<value>
 ```
 php artisan ahead:route <your route name> --<flagname>=<value>
 ```
-
-~~~

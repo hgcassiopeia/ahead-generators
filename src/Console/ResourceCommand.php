@@ -9,6 +9,7 @@ class ResourceCommand extends BaseCommand {
 	protected $signature = 'ahead:rsc
         {name : Name of the resource.}
         {--path=app/Resources : where to store the resource php file.}
+        {--force= : override the existing files}
     ';
 
 	protected $description = 'Generates a resource';
@@ -25,7 +26,7 @@ class ResourceCommand extends BaseCommand {
             ])
             ->get();
         
-        $this->save($content, "./{$path}/{$name}.php", "{$name} resource");
+        $this->save($content, "./{$path}/{$name}Resource.php", "{$name} resource");
     }
 
     protected function getNamespace()

@@ -7,61 +7,43 @@ use Ahead\Generators\Console\BaseCommand;
 class RepositoryCommand extends BaseCommand {
 
 	protected $signature = 'ahead:repo
-        {name : Name of the model.}
-        {--table= : the table name.}
-        {--fillable= : the fillable fields.}
-        {--timestamps=true : enables timestamps on the model.}
-        {--path=app/Models : where to store the model php file.}
+        {name : Name of the repository.}
+        {--model= : the model class name has relationships with this repository.}
+        {--path=app/Repositories : where to store the model php file.}
+        {--force= : override the existing files}
     ';
 
-	protected $description = 'Generates a model';
+	protected $description = 'Generates a repository';
 
     public function handle()
     {
         $name = $this->argument('name');
+        $model = empty($this->option('model')) ? $name : $this->option('model');
         $path = $this->option('path');
-
-        $content = $this->getTemplate('model')
+        
+        $content = $this->getTemplate('repository')
             ->with([
                 'name' => $name,
-                'namespace' => $this->getNamespace(),
-                'table' => $this->getTableName(),
-                'fillable' => $this->getAsArrayFields('fillable'),
-                'additional' => $this->getAdditional()
+                'model' => $model,
+                'namespace' => $this->getNamespace()
             ])
             ->get();
         
-        $this->save($content, "./{$path}/{$name}.php", "{$name} model");
+        $this->getBaseRepository("./{$path}/BaseRepository.php");
+        $this->save($content, "./{$path}/{$name}Repository.php", "{$name} repository");
     }
 
-    protected function getAsArrayFields($arg, $isOption = true)
+    protected function getBaseRepository($path)
     {
-        $arg = ($isOption) ? $this->option($arg) : $this->argument($arg);
-        
-        if(is_string($arg)){
-        	$arg = explode(',', $arg);
-        } else if(! is_array($arg)) {
-            $arg = [];
+        $fileExists = $this->checkFileExists($path);
+        if(!$fileExists){
+            $content = $this->getTemplate('BaseRepository')
+            ->with([
+                'namespace' => $this->getNamespace()
+            ])
+            ->get();
+            $this->save($content, $path, "Base repository");
         }
-        
-        return implode(', ', array_map(function($item){
-            return '"' . $item . '"';
-        }, $arg));
-    }
-
-    protected function getTableName()
-    {
-        // dd($this->option('table'));
-        return !empty($this->option('table'))
-            ? "protected \$table = '".$this->option('table')."';" . PHP_EOL
-            : '';
-    }
-
-    protected function getAdditional()
-    {
-        return $this->option('timestamps') == 'false'
-            ? "public \$timestamps = false;" . PHP_EOL
-            : '';
     }
 
     protected function getNamespace()

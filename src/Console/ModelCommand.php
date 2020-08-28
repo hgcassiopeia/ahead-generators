@@ -12,6 +12,7 @@ class ModelCommand extends BaseCommand {
         {--fillable= : the fillable fields.}
         {--timestamps=true : enables timestamps on the model.}
         {--path=app/Models : where to store the model php file.}
+        {--force= : override the existing files}
     ';
 
 	protected $description = 'Generates a model';

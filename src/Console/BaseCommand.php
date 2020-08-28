@@ -50,6 +50,17 @@ class BaseCommand extends Command {
         }
     }
 
+    protected function checkFileExists($path)
+    {
+        $fileExists = false;
+        if ($this->fs->exists($path)) {
+            return $fileExists = true;
+        }
+        else{
+            return $fileExists;
+        }
+    }
+
     protected function spaces($n)
     {
         return str_repeat(' ', $n);

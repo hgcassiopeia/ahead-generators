@@ -16,6 +16,7 @@ class CommandServiceProvider extends ServiceProvider
       $this->registerModelCommand();
       $this->registerResourceCommand();
       $this->registerRepositoryCommand();
+      $this->registerControllerCommand();
    }
 
    protected function registerModelCommand(){
@@ -37,5 +38,12 @@ class CommandServiceProvider extends ServiceProvider
           return $app['Ahead\Generators\Console\RepositoryCommand'];
       });
       $this->commands('command.ahead.repository');
+   }
+
+   protected function registerControllerCommand(){
+      $this->app->singleton('command.ahead.controller', function($app){
+          return $app['Ahead\Generators\Console\ControllerCommand'];
+      });
+      $this->commands('command.ahead.controller');
    }
 }

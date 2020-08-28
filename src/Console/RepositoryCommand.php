@@ -9,7 +9,7 @@ class RepositoryCommand extends BaseCommand {
 	protected $signature = 'ahead:repo
         {name : Name of the repository.}
         {--model= : the model class name has relationships with this repository.}
-        {--path=app/Repositories : where to store the model php file.}
+        {--path=app/Repositories : where to store the model repository file.}
         {--force= : override the existing files}
     ';
 

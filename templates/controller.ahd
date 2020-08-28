@@ -1,0 +1,82 @@
+<?php
+
+namespace {{namespace}};
+
+use Illuminate\Support\Facades\Validator; 
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\{{model}};
+use App\Resources\{{resource}};
+use App\Repositories\{{repository}};
+
+class {{name}}Controller extends Controller
+{
+    protected ${{variable}};
+
+    /**
+     * Create a new controller for {{variable}}.
+     *
+     * @return void
+     */
+    public function __construct({{repository}} ${{variable}})
+    {
+        $this->middleware('auth'); 
+        $this->{{variable}} = ${{variable}};
+    }
+
+    public function getAll()
+    {
+        $collection = {{model}}::where('is_active', 1)->get();
+        return {{resource}}::collection($collection);
+    }
+
+    public function getById($id)
+    {
+        $collection = $this->{{variable}}->getById($id);
+        return {{resource}}::collection($collection);
+    }
+
+    public function store(Request $request)
+    {
+        $rules = [
+            'example' => 'required',
+        ];
+    
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'data' => null,
+                'error' => $validator->errors()
+            ]);
+        }
+
+        $result = $this->{{variable}}->create($request);
+        return $result;
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $result = $this->{{variable}}->update($request, $id);
+        return $result;
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $result = $this->{{variable}}->delete($id);
+        return $result;
+    }
+}

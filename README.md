@@ -90,7 +90,7 @@ php artisan ahead:ctrl <your controller name> --<flagname>=<value>
 
 | Flag      | Description |
 | ----------- | ----------- |
-| --controller      | กำหนดชื่อ Controller กรณีที่มี Controller อยู่แล้ว       |
+| --controller     | กำหนดชื่อ Controller กรณีที่มี Controller อยู่แล้ว       |
 | --laravel      | กำหนด Pattern ของ Route กรณีที่ใช้กับ Project ที่เป็น laravel route จะถูก generate ที่ routes/api.php ถ้าไม่ใช่ default จะเป็น routes/web.php ตัวอย่างการส่ง flag --laravel=true     |
 
 #### Command

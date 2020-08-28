@@ -1,0 +1,8 @@
+/**
+ * Routes for resource {{resource}}
+ */
+$router->get('{{resource}}', '{{controller}}@getAll');
+$router->get('{{resource}}/{id}', '{{controller}}@getById');
+$router->post('{{resource}}', '{{controller}}@store');
+$router->put('{{resource}}/{id}', '{{controller}}@update');
+$router->delete('{{resource}}/{id}', '{{controller}}@destroy');

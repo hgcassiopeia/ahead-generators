@@ -18,19 +18,27 @@ class RepositoryCommand extends BaseCommand {
     public function handle()
     {
         $name = $this->argument('name');
-        $model = empty($this->option('model')) ? $name : $this->option('model');
         $path = $this->option('path');
         
         $content = $this->getTemplate('repository')
             ->with([
                 'name' => $name,
-                'model' => $model,
+                'model' => $this->getModel(),
                 'namespace' => $this->getNamespace()
             ])
             ->get();
         
         $this->getBaseRepository("./{$path}/BaseRepository.php");
         $this->save($content, "./{$path}/{$name}Repository.php", "{$name} repository");
+    }
+
+    protected function getModel()
+    {
+        $model = $this->option('model');
+        if(!$model){
+            $model = ucwords(str_plural(camel_case($this->argument('name'))));
+        }
+        return $model;
     }
 
     protected function getBaseRepository($path)

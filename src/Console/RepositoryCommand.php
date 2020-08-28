@@ -4,9 +4,9 @@ namespace Ahead\Generators\Console;
 
 use Ahead\Generators\Console\BaseCommand;
 
-class ModelCommand extends BaseCommand {
+class RepositoryCommand extends BaseCommand {
 
-	protected $signature = 'ahead:model
+	protected $signature = 'ahead:repo
         {name : Name of the model.}
         {--table= : the table name.}
         {--fillable= : the fillable fields.}

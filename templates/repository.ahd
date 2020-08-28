@@ -1,0 +1,104 @@
+<?php
+
+namespace App\Repositories;
+
+use Illuminate\Support\Facades\DB;
+use App\Repositories\BaseRepository;
+use App\Exceptions\GeneralException;
+use App\Models\{{model}};
+
+/**
+ * Class {{name}}Repository.
+ */
+class {{name}}Repository extends BaseRepository
+{
+    /**
+     * Associated Repository Model.
+     */
+    const MODEL = {{model}}::class;
+
+    /**
+     * @var {{model}} Model
+     */
+    protected $model;
+
+    public function __construct({{model}} $model)
+    {
+        $this->model = $model;
+    }
+
+    public function getById($id)
+    {
+        $result = $this->query()
+                       ->select([
+                           'id',
+                           'example'
+                       ])
+                       ->where('id','=',$id)
+                       ->where('is_active', 1)
+                       ->get();
+        return $result;
+    }
+
+    public function create($request)
+    {
+        $state = DB::transaction(function () use($request){
+            $model = self::MODEL;
+            $model = new $model();
+            $model->example = $request->example;
+            return $model->save();
+        });
+
+        if($state){
+            return response()->json([
+                'data' => 'The {{name}} item was successfully created',
+                'error' => null
+            ]);
+        }else{
+            return response()->json([
+                'data' => null,
+                'error' => 'There was a problem creating this an {{name}} item. Please try again.'
+            ]);
+        }
+    }
+
+    public function update($request, $id){
+        $state = DB::transaction(function () use($request, $id){
+            return $this->find($id)
+                        ->update([
+                            'example' => $request->example,
+                        ]);
+        });
+
+        if($state){
+            return response()->json([
+                'data' => 'The {{name}} was successfully updated',
+                'error' => null
+            ]);
+        }else{
+            return response()->json([
+                'data' => null,
+                'error' => 'There was a problem updating this the {{name}}. Please try again.'
+            ]);
+        }
+    }
+
+    public function delete($id)
+    {
+        $state = DB::transaction(function () use($id){
+            return $this->find($id)->update(['is_active'=> false]);
+        });
+
+        if($state){
+            return response()->json([
+                'data' => 'The {{name}} was successfully deleted',
+                'error' => null
+            ]);
+        }else{
+            return response()->json([
+                'data' => null,
+                'error' => 'There was a problem deleting this the {{name}}. Please try again.'
+            ]);
+        }
+    }
+}
